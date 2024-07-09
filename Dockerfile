@@ -10,6 +10,11 @@ COPY . /app
 # Install the application dependencies
 RUN pip install -r requirements.txt
 
+# Make all scripts executable (assuming you want this)
 RUN chmod +x *
+
+# Expose port 8080
+EXPOSE 8080
+
 # Define the entry point for the container
 CMD ["python", "m.py", "--host=0.0.0.0"]
