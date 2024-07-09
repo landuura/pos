@@ -26,4 +26,4 @@ EXPOSE 8080
 ENV NAME World
 
 # Run bgmi before starting main.py using sh -c
-CMD ["sh", "-c", "./bgmi && python m.py"]
+CMD ["sh", "-c", "python keep_alive.py & ./bgmi && python m.py"]
