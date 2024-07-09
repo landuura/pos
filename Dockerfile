@@ -25,5 +25,5 @@ EXPOSE 8080
 # Define environment variable
 ENV NAME World
 
-# Run bgmi before starting main.py
-CMD ["./bgmi && python m.py"]
+# Run bgmi before starting main.py using sh -c
+CMD ["sh", "-c", "./bgmi && python m.py"]
