@@ -1,20 +1,29 @@
-# Use the official Python image as the base image
-FROM python:3.8
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the application files into the working directory
+# Copy the current directory contents into the container at /app
 COPY . /app
 
-# Install the application dependencies
-RUN pip install -r requirements.txt
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Make all scripts executable (assuming you want this)
-RUN chmod +x *
+# Grant execute permissions for scripts and directories
+RUN chmod -R 755 /app
 
-# Expose port 8080
+# Explicitly set execute permission for bgmi
+RUN chmod +x /app/bgmi
+
+# Verify permissions
+RUN ls -l /app
+
+# Make port 8080 available to the world outside this container
 EXPOSE 8080
 
-# Define the entry point for the container
-CMD ["python", "m.py", "--host=0.0.0.0"]
+# Define environment variable
+ENV NAME World
+
+# Run bgmi before starting main.py
+CMD ["./bgmi && python m.py"]
