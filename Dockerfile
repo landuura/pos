@@ -13,6 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Give execute permissions to keep_alive.py and the script files
 RUN chmod +x /app
 RUN chmod +x m.py
+RUN chmod +x /app/bgmi                                     
 
 # Make port 8443 available to the world outside this container
 EXPOSE 8443
