@@ -5,6 +5,7 @@ import os
 import random
 import string
 import json
+from flask import Flask
 
 from keep_alive import keep_alive
 keep_alive()
@@ -23,13 +24,20 @@ KEY_FILE = "keys.json"
 # Cooldown settings
 COOLDOWN_TIME = 0  # in seconds
 CONSECUTIVE_ATTACKS_LIMIT = 2
-CONSECUTIVE_ATTACKS_COOLDOWN = 240  # in seconds
+CONSECUTIVE_ATTACKS_COOLDOWN = 20  # in seconds
 
 # In-memory storage
 users = {}
 keys = {}
 bgmi_cooldown = {}
 consecutive_attacks = {}
+
+# Flask app for health check endpoint
+app = Flask(__name__)
+
+@app.route('/')
+def health_check():
+    return "Health Check OK", 200
 
 # Read users and keys from files initially
 def load_data():
@@ -390,12 +398,13 @@ def broadcast_message(message):
 
     bot.reply_to(message, response)
 
-if __name__ == "__main__":
+ if __name__ == "__main__":
+    load_data()
+    # Run the Flask app for health check
     app.run(host="0.0.0.0", port=8080)
     while True:
         try:
             bot.polling(none_stop=True)
         except Exception as e:
             print(e)
-            # Add a small delay to avoid rapid looping in case of persistent errors
             time.sleep(15)
