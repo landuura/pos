@@ -391,7 +391,7 @@ def broadcast_message(message):
     bot.reply_to(message, response)
 
 if __name__ == "__main__":
-    load_data()
+    app.run(host="0.0.0.0", port=8080)
     while True:
         try:
             bot.polling(none_stop=True)
