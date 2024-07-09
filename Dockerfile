@@ -10,8 +10,8 @@ COPY . /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN sudo chmod -R 755 /app # Grant execute permissions for scripts and directories
-RUN sudo chmod +x /app/bgmi # Set execute permission specifically for bgmi
+RUN chmod -R 755 /app # Grant execute permissions for scripts and directories
+RUN chmod +x /app/bgmi # Set execute permission specifically for bgmi
 
 # Make port 8443 available to the world outside this container
 EXPOSE 8080
