@@ -1,21 +1,24 @@
-# Use a slim Python base image for efficiency
+# Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
-# Set working directory within the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy requirements.txt (adjust the path if needed)
-COPY requirements.txt ./
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Install dependencies (adjust if you have a different package manager)
-RUN pip install -r requirements.txt
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all other files and set appropriate permissions (caution!)
-COPY --from=source . .
-RUN chmod -R 755 /app  # Grant execute permissions for scripts and directories
+# Give execute permissions to keep_alive.py and the script files
+RUN chmod +x /app
+RUN chmod +x main.py
 
-# Optional: Set executable permissions for specific files
-# RUN chmod +x /app/my_script.sh
+# Make port 8443 available to the world outside this container
+EXPOSE 8443
 
-# Entrypoint to run your script (adjust the command)
-ENTRYPOINT ["python", "m.py"]
+# Define environment variable
+ENV NAME World
+
+# Run main.py when the container launches
+CMD ["python", "main.py"]
