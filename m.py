@@ -39,6 +39,9 @@ app = Flask(__name__)
 def health_check():
     return "Health Check OK", 200
 
+def start_flask():
+    app.run(host="0.0.0.0", port=8080)
+
 # Read users and keys from files initially
 def load_data():
     global users, keys
@@ -398,13 +401,16 @@ def broadcast_message(message):
 
     bot.reply_to(message, response)
 
- if __name__ == "__main__":
+ def start_telebot():
     load_data()
-    # Run the Flask app for health check
-    app.run(host="0.0.0.0", port=8080)
     while True:
         try:
             bot.polling(none_stop=True)
         except Exception as e:
             print(e)
             time.sleep(15)
+
+# Main execution
+if __name__ == "__main__":
+    threading.Thread(target=start_flask).start()  # Start Flask in a new thread
+    start_telebot()  # Start 
