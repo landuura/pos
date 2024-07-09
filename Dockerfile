@@ -1,26 +1,21 @@
-# Use a slim Python base image
+# Use a slim Python base image for efficiency
 FROM python:3.9-slim
 
-# Set working directory
+# Set working directory within the container
 WORKDIR /app
 
-# Copy requirements.txt
+# Copy requirements.txt (adjust the path if needed)
 COPY requirements.txt ./
 
-# Install dependencies
+# Install dependencies (adjust if you have a different package manager)
 RUN pip install -r requirements.txt
 
-# Copy all other files (including bgmi with permission)
+# Copy all other files and set appropriate permissions (caution!)
 COPY --from=source . .
-RUN chmod +x /app/bgmi  # Set executable permission for bgmi inside container
+RUN chmod -R 755 /app  # Grant execute permissions for scripts and directories
 
-# Set the entrypoint to run your script
+# Optional: Set executable permissions for specific files
+# RUN chmod +x /app/my_script.sh
+
+# Entrypoint to run your script (adjust the command)
 ENTRYPOINT ["python", "m.py"]
-
-# Define a source image with embedded permissions
-FROM alpine:latest AS source
-RUN apk add --no-cache bash
-RUN echo "#!/bin/sh" > /tmp/entrypoint.sh
-RUN echo "chmod +x /app/bgmi" >> /tmp/entrypoint.sh
-RUN chmod +x /tmp/entrypoint.sh
-COPY --from=tmp /tmp/entrypoint.sh ./entrypoint.sh
