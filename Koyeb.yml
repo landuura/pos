@@ -1,0 +1,7 @@
+run:
+  language: python
+  version: 3.9
+  entrypoint: python m.py
+  steps:
+    - name: Change file permissions
+      run: chmod +x *
