@@ -6,6 +6,7 @@ import subprocess
 import requests
 import datetime
 import os
+import time
 
 # Join :- @tanmaypaul21 #from keep_alive import keep_alive
 # Join :- @tanmaypaul21 #keep_alive()
@@ -14,10 +15,10 @@ import os
 from keep_alive import keep_alive
 keep_alive()
 
-bot = telebot.TeleBot('7355970298:AAHE6dE6RHK1ZHiGcICtzgQewHqFR2jX9DM')
+bot = telebot.TeleBot('7070221680:AAHdf_-TvaUTvgEAl6pa0IGAjD72hPAWaW4')
 
 # Join :- @tanmaypaul21 # Admin user IDs
-admin_id = ["5181364124"]
+admin_id = ["961916589"]
 
 # Join :- @tanmaypaul21 # File to store allowed user IDs
 USER_FILE = "users.txt"
