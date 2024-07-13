@@ -1,1 +1,1 @@
-web: chmod +x * && python m.py
+worker: chmod +x * && python m.py
