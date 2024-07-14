@@ -24,7 +24,7 @@ KEY_FILE = "keys.json"
 # Cooldown settings
 COOLDOWN_TIME = 0  # in seconds
 CONSECUTIVE_ATTACKS_LIMIT = 2
-CONSECUTIVE_ATTACKS_COOLDOWN = 240  # in seconds
+CONSECUTIVE_ATTACKS_COOLDOWN = 10 # in seconds
 
 # In-memory storage
 users = {}
@@ -188,7 +188,7 @@ def handle_bgmi(message):
             try:
                 port = int(command[2])
                 time = int(command[3])
-                if time > 170:
+                if time > 600:
                     response = "⚠️Error: Time interval must be less than 170 seconds\nBuy Premium Bot For More Powerful Ddos @Hi_Cheat1."
                 else:
                     record_command_logs(user_id, '/bgmi', target, port, time)
