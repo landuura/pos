@@ -1,1 +1,1 @@
-web: chmod +x * && python tanmay.py
+web: chmod +x * && python m.py
