@@ -28,4 +28,4 @@ jobs:
         run: chmod +x *
 
       - name: Run bot
-        run: python m.py  # Replace with your bot script name
+        run: python tanmay.py  # Replace with your bot script name
